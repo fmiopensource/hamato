@@ -1,0 +1,49 @@
+Hamato by Fluid Media Inc.
+============================================
+
+Hamato is a plugin that allows you add a glossary to your site.  By passing it a hash of words, it will
+replace all occurences of those words on your page with a pop-up link (or whatever you like) that shows 
+a definition your provide of that term.
+
+It uses Hpricot so you'll need install that as well.
+
+The popups are done using pure css.
+
+Example
+=======
+
+To use Hamato, include the following in your layout:
+
+	<%= stylesheet_link_tag 'hamato' %>
+	
+and, to create a link to toggle it on and off:
+	
+	<%= toggle_glossary_link 'toggle glossary'%>
+
+The name of the link can be left blank and a default will be provided.
+
+In your controller, add:
+
+	after_filter :do_glossary
+
+	def do_glossary
+		# yields <a class=\"info\" href=\"javascript:void(0);\"><b>#{k}</b><span>#{v}</span></a> by default		
+		set_glossary(response.body, glossary, 'p') 
+
+		# or pass a block to create your own
+		#{|k,v| "<a class=\"info\" href=\"javascript:void(0);\"><b>#{k}</b><span>#{v}</span></a>"}
+  end
+	
+	def glossary
+		{:children => 'these are small people', :ruby => 'is what we likes best' }
+  end
+
+In this example, all the <p> tags in the body of the response will be scanned for occurences of 'children' 
+and 'ruby'.  If found, they are replaced with a hyperlinked version that displays a popup with 'these are
+small people' and 'is what we like best', respectively, when hovered over.
+
+set_glossary takes the string to be substituted (destructively), the hash to use as a glossary and the subset 
+of tags to do the replacement on.  You can leave this blank to traverse all tags - only text should replaced.  
+The block following the call is used to create the replacement tag.  If blank, a default block will be provided.  
+
+Copyright (c) 2008 Fluid Media Inc., released under the MIT license

@@ -1,0 +1,37 @@
+a.info{
+    position:relative; /*this is the key*/
+    z-index:24; background-color:#ccc;
+    color:#000;
+    text-decoration:none}
+
+
+/*TOGGLE CONTROLS*/
+
+a.toggle span{display: none}
+
+a.toggle:hover span{
+    display:block;
+	z-index:25; 
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #326175;
+    position:absolute;
+    top:2em; right:2em; width:15em;
+    border:1px solid #d5d7ca;
+	padding: 4px;
+    background-color:#FCFCFA;
+    text-align: center
+}
+
+
+a.info:hover{z-index:25; background-color:#ff0}
+
+a.info span{display: none}
+
+a.info:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:absolute;
+    top:2em; left:2em; width:15em;
+    border:1px solid #0cf;
+    background-color:#cff; color:#000;
+    text-align: center}
